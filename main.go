@@ -4,12 +4,17 @@ import (
 	core "github.com/sethvargo/go-githubactions"
 )
 
-func main() {
-	val := core.GetInput("mode")
-	if val == "" {
-		core.Fatalf("missing 'mode'")
-	}
+const (
+	varName = "mode"
+)
 
-	core.Infof(val)
+func main() {
+
+	s := core.New().GetInput(varName)
+	if s != "" {
+		core.Infof(s)
+	} else {
+		core.Infof("\"%s\" var not set", varName)
+	}
 
 }

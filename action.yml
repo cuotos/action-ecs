@@ -5,8 +5,6 @@ inputs:
     description: 'mode'
     required: true
 runs:
-  using: 'docker'
-  image: 'docker://public.ecr.aws/y6e6p2k4/action-ecs'
-  args:
-    - ${{ inputs.mode }}
+  using: node12
+  main: invoke-binary.js
     
