@@ -9,6 +9,9 @@ on:
 permissions:
   contents: write
 
+env:
+  version: v0.0.2-alpha.1
+
 jobs:
   build:
     name: build
@@ -25,11 +28,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o main-${{matrix.os}}-${{matrix.arch}}-0.0.1
+      - run: GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o main-${{matrix.os}}-${{matrix.arch}}-${{env.version}}
       - uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: main-${{matrix.os}}-${{matrix.arch}}-0.0.1
+          file: main-${{matrix.os}}-${{matrix.arch}}-${{env.version}}
           # tag: ${{ github.ref }}
-          tag: v0.0.1
+          tag: ${{env.version}}
           overwrite: true
